@@ -1,92 +1,129 @@
-<img width="877" height="640" alt="image" src="https://github.com/user-attachments/assets/6bd8def2-8d4b-415b-a4ec-640b081f6cc6" />
+<p align="center">
+  <img src="https://raw.githubusercontent.com/seb07uk/python-builder/main/logo.png" width="96" alt="Python Builder Logo" />
+</p>
 
-<img width="877" height="915" alt="image" src="https://github.com/user-attachments/assets/100ad35f-ef61-4fe1-8cec-ce5852876ed8" />
+<h1 align="center">Python Builder v3.0</h1>
+<p align="center"><strong>Python → EXE Compiler GUI · polsoft.ITS™ Group</strong></p>
 
-
-# 🚀 PyCompiler 2.1 – polsoft.ITS™ London
-
-### **The ultimate GUI tool to transform your Python scripts into professional .EXE executables.**
-
-**PyCompiler 2.1** is an advanced graphical interface for PyInstaller designed for developers who value their time. This tool eliminates the need for complex command-line arguments, allowing you to compile projects within a modern, dark-themed environment inspired by **polsoft.ITS™ London**.
-
----
-
-## ✨ Why Choose PyCompiler?
-
-* **One-Click Experience:** Simply select your script and click to begin the compilation process.
-* **Metadata Management:** The tool automatically generates version files (VSVersionInfo) so your executable displays professional file properties, descriptions, and copyright details (©2026) in Windows.
-* **Asset Bundling:** Effortlessly include additional data files (JSON, images, sounds) or entire folders that your application needs to function.
-* **Smart Status Indicators:** Real-time LED status lights confirm whether your script, icon, and version information are correctly configured before you build.
-* **Modern Interface:** Features an animated 3D logo and a sleek layout designed for efficiency and clarity.
+<p align="center">
+  <img src="https://img.shields.io/badge/version-3.0-00f0ff?style=flat-square" />
+  <img src="https://img.shields.io/badge/platform-Windows-blue?style=flat-square" />
+  <img src="https://img.shields.io/badge/python-3.10%2B-yellow?style=flat-square" />
+  <img src="https://img.shields.io/badge/license-proprietary-a855f7?style=flat-square" />
+</p>
 
 ---
 
-## 🛠 Key Features
+## 📸 Screenshot
 
-* **Console/Window Toggle:** Choose with a single checkbox whether your app runs with a background terminal or as a clean, windowed application using the `--noconsole` flag.
-* **Real-Time Output Logging:** Monitor every step of the PyInstaller process through a collapsible "OUTPUT" log window.
-* **Broad Compatibility:** Engineered to create executables compatible with Windows 8, 10, and 11.
-* **Integrated Workflow:** Quick-access buttons to open your project folder, the `dist` output directory, or a system CMD terminal.
-* **Persistent Settings:** Your EXE name and version numbers are saved automatically in a local configuration file for your next session.
+![Python Builder v3.0 – Main Window](screenshot.png)
 
 ---
 
-## 🚀 Getting Started
+## 📋 Overview
 
-1.  **Select Script:** Choose your main `.py` source file.
-2.  **Configure:** Enter your desired EXE name and set the 4-digit version number.
-3.  **Style:** Add a custom `.ico` file to give your program a unique identity.
-4.  **Build:** Click **"Compile to EXE"** and track the progress bar.
+**Python Builder v3.0** is a professional graphical tool for compiling Python scripts (`.py`) and packages into standalone Windows executables (`.exe`). Built on top of **PyInstaller**, it wraps the entire compilation workflow in an intuitive dark-themed GUI — no command line required.
 
----
-
-## 📦 Requirements
-
-* **Python 3.x**
-* **PyInstaller:** (Install via `pip install pyinstaller`)
+> **Product:** Python Builder v3.0 – EXE  
+> **Author:** Sebastian Januchowski  
+> **Company:** polsoft.ITS™ Group  
+> **Contact:** polsoft.its@fastservice.com  
+> **GitHub:** https://github.com/seb07uk  
+> **Copyright:** 2025© polsoft.ITS™. All rights reserved.
 
 ---
 
-## 👨‍💻 About the Author
+## ✨ Features
 
-Developed by **Sebastian Januchowski** for **polsoft.ITS™ London**. 
-
-* **Contact:** polsoft.its@fastservice.com
-* **GitHub:** [seb07uk](https://github.com/seb07uk)
-
----
-> **PyCompiler 2.1** – Because your code deserves a professional finish.
->
-> # 🚀 PyCompiler 2.1 – polsoft.ITS™ London
-
-### **Zaawansowane narzędzie GUI do kompilacji Python do EXE**
-
-**PyCompiler 2.1** to profesjonalna nakładka graficzna na PyInstaller, zaprojektowana w celu usprawnienia tworzenia plików wykonywalnych Windows. Stworzona przez **polsoft.ITS™ London**, oferuje nowoczesne środowisko do zarządzania metadanymi i zasobami bez konieczności używania linii komend.
-
----
-
-## ✨ Kluczowe funkcje
-* **Kompilacja jednym kliknięciem:** Szybka konwersja skryptów `.py` na samodzielne pliki `.exe`.
-* **Automatyzacja metadanych:** Automatyczne osadzanie wersji, opisu i praw autorskich (©2026) we właściwościach pliku.
-* **Zarządzanie zasobami:** Łatwe dołączanie własnych ikon (`.ico`), plików danych (JSON, obrazy) oraz całych folderów.
-* **Wskaźniki statusu:** Zintegrowane diody LED weryfikujące gotowość plików źródłowych i zasobów.
-* **Terminal na żywo:** Podgląd logów kompilacji w czasie rzeczywistym dzięki rozwijanemu panelowi.
+| Feature | Description |
+|---|---|
+| **Single-file EXE** | `--onefile` mode — compiles everything into one portable `.exe` |
+| **Portable mode** | Creates a portable folder with launcher `.bat` — no installation needed |
+| **Custom icon** | Embed your own `.ico` icon into the compiled binary |
+| **EXE Metadata** | Set App Name, Company, Version, Description, Copyright |
+| **Password protection** | Password-locked compilation (SHA-256 hashed) |
+| **UAC elevation** | Optionally request Administrator privileges on launch |
+| **Console toggle** | Show or hide the terminal window at runtime |
+| **Real-time build log** | Color-coded log streamed live during compilation |
+| **EN / PL UI** | Interface available in English and Polish |
+| **Auto-install PyInstaller** | Detects missing PyInstaller and offers to install it |
 
 ---
 
-## 🛠 Szczegóły techniczne
-* **Język:** Python 3.x.
-* **Framework:** Tkinter ze wsparciem High-DPI i animowanym brandingiem 3D.
-* **Wymagania:** `pip install pyinstaller`.
-* **Kompatybilność:** Windows 8, 10 oraz 11.
+## 🖥️ System Requirements
+
+- **OS:** Windows 10 / 11 (64-bit recommended)
+- **Python:** 3.10 or newer
+- **Dependencies (auto-detected):**
+  - `pyinstaller` ≥ 6.x
+  - `Pillow` (for icon handling)
+  - `tkinter` (bundled with Python)
 
 ---
 
-## 🚀 Szybki Start
-1. **Źródło:** Wybierz główny skrypt `.py`.
-2. **Konfiguracja:** Ustaw nazwę aplikacji i 4-częściowy numer wersji.
-3. **Personalizacja:** Opcjonalnie dodaj ikonę i dodatkowe foldery z danymi.
-4. **Kompilacja:** Kliknij **"Kompiluj do EXE"** – wynik znajdziesz w folderze `dist`.
+## 🚀 Quick Start
+
+### Run from source
+```bash
+pip install pyinstaller pillow
+python python_builder.py
+```
+
+### Compile to EXE (self-hosting)
+```bash
+pyinstaller --onefile --windowed --icon=py-2-exe.ico python_builder.py
+```
 
 ---
-**© 2026 polsoft.ITS™ London | Autor: Sebastian Januchowski**
+
+## 🗂️ Interface Guide
+
+### Toolbar
+| Button | Action |
+|---|---|
+| 📄 File | Pick a single `.py` source file |
+| 📁 Folder | Pick a Python package directory |
+| 🖼 Icon | Choose a `.ico` icon file |
+| 📂 Output | Set the output directory |
+| 🏷 Metadata | Edit EXE version/company metadata |
+| 🔒 Password | Enable/disable compilation password |
+
+### Options panel
+- **--onefile** — pack everything into a single executable
+- **--console** — keep the terminal window visible (useful for CLI tools)
+- **UAC Administrator** — request elevated privileges on startup
+
+### Build actions
+- **📦 PORTABLE** — builds a portable directory + `.bat` launcher
+- **⚡ BUILD EXE** — compiles to a single-file `.exe` via PyInstaller
+- **📂 OPEN OUTPUT** — opens the output folder in Explorer
+
+---
+
+## 🔒 Password Protection
+
+When enabled, a SHA-256 hash of the password is embedded as a constant in the compiled binary. The password is required every time a new build is triggered — protecting your compilation workflow from unauthorized use.
+
+---
+
+## 🌐 Internationalization
+
+The interface supports **English** and **Polish** (`EN` / `PL` toggle button in the top-right corner). All labels, dialogs, and log messages are fully translated.
+
+---
+
+## 📁 Project Structure
+
+```
+python_builder.py      ← Main application (single-file)
+py-2-exe.ico           ← Application icon
+README.md              ← This file
+```
+
+---
+
+## 📜 License
+
+© 2025 polsoft.ITS™ Group — Sebastian Januchowski  
+All rights reserved. Unauthorized redistribution is prohibited.  
+Contact: polsoft.its@fastservice.com

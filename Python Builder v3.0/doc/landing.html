@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Builder v3.0 – Kompilator Python do EXE | polsoft.ITS™ Group</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap');
+
+  :root {
+    --bg: #04080f;
+    --bg2: #080e1c;
+    --bg3: #0c1428;
+    --accent: #00f0ff;
+    --accent2: #a855f7;
+    --accent3: #ff2dd4;
+    --accent4: #ff9500;
+    --success: #00ff88;
+    --text: #e2f0ff;
+    --dim: #5a7a9a;
+    --card: rgba(15,25,50,0.8);
+    --glow: 0 0 40px rgba(0,240,255,0.15);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Wygląd paska przewijania */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+
+  header {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    background: radial-gradient(circle at center, var(--bg3) 0%, var(--bg) 100%);
+    position: relative;
+  }
+
+  .hero-badge {
+    background: rgba(0, 240, 255, 0.1);
+    border: 1px solid var(--accent);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 900;
+    background: linear-gradient(to right, #fff, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+  }
+
+  .hero-sub {
+    font-size: 1.2rem;
+    color: var(--dim);
+    max-width: 700px;
+    margin-bottom: 2.5rem;
+  }
+
+  .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+  .btn {
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+  }
+
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 30px var(--accent); }
+
+  .btn-secondary {
+    background: transparent;
+    border: 1px solid var(--dim);
+    color: var(--text);
+  }
+
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+
+  .section-label {
+    color: var(--accent);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  /* Sekcja Screenshotu */
+  .screenshot-container {
+    margin-top: 3rem;
+    position: relative;
+    padding: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  }
+
+  .screenshot-container img {
+    width: 100%;
+    display: block;
+    border-radius: 6px;
+    border: 2px solid var(--bg);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 2.5rem;
+    border-radius: 16px;
+    transition: all 0.3s;
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+    transform: translateY(-10px);
+    background: rgba(15,25,50,1);
+  }
+
+  .card h3 { font-family: 'Orbitron', sans-serif; margin-bottom: 1rem; color: #fff; }
+  .card p { color: var(--dim); font-size: 0.95rem; }
+
+  .steps {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 4rem;
+    flex-wrap: wrap;
+  }
+
+  .step { text-align: center; flex: 1; min-width: 200px; }
+
+  .step-num {
+    width: 60px;
+    height: 60px;
+    background: var(--bg3);
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    color: var(--accent);
+    font-size: 1.5rem;
+  }
+
+  footer {
+    padding: 4rem 2rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    text-align: center;
+    color: var(--dim);
+    font-size: 0.8rem;
+  }
+
+  .lang-switch {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 100;
+  }
+
+  .lang-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+  }
+
+  .lang-btn.active { border-color: var(--accent); color: var(--accent); }
+
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="lang-switch">
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn active" onclick="setLang('pl')">PL</button>
+    </div>
+
+    <div class="hero-badge">Aplikacja Portable v3.0</div>
+    <h1 data-t="hero_title">Python Builder</h1>
+    <p class="hero-sub" data-t="hero_sub">Profesjonalne narzędzie GUI do kompilacji skryptów Python (.py) w samodzielne pliki wykonywalne Windows (.exe) za pomocą jednego kliknięcia.</p>
+    
+    <div class="btn-group">
+      <a href="https://github.com/seb07uk" class="btn btn-primary" data-t="btn_github">⚡ GitHub</a>
+      <a href="#features" class="btn btn-secondary" data-t="btn_learn">Dowiedz się więcej</a>
+    </div>
+  </header>
+
+  <section id="preview">
+    <span class="section-label" data-t="preview_label">Interfejs Programu</span>
+    <div class="screenshot-container">
+      <img src="Screenshot.png" alt="Python Builder v3.0 Interface Preview">
+    </div>
+  </section>
+
+  <section id="how-it-works">
+    <span class="section-label" data-t="process_label">Proces Kompilacji</span>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3 data-t="stat_1">Wybierz skrypt</h3>
+        <p data-t="step1_d">Wskaż swój główny plik .py do przetworzenia.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3 data-t="stat_2">Konfiguruj</h3>
+        <p data-t="step2_d">Dodaj ikonę, hasło lub wymuś uprawnienia Admina.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3 data-t="stat_3">Kompiluj</h3>
+        <p data-t="step3_d">Odbierz gotowy plik EXE w folderze wyjściowym.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <span class="section-label" data-t="feat_label">Główne Funkcje</span>
+    <h2 style="text-align: center; font-family: 'Orbitron'; font-size: 2.5rem; margin-bottom: 2rem;" data-t="feat_title">Zaawansowany Silnik Kompilacji</h2>
+    
+    <div class="grid">
+      <div class="card">
+        <h3 data-t="f1_t">Pojedynczy plik EXE</h3>
+        <p data-t="f1_d">Pakuj wszystkie biblioteki i zależności w jeden, przenośny plik .exe. Użytkownik końcowy nie musi mieć zainstalowanego Pythona.</p>
+      </div>
+      <div class="card">
+        <h3 data-t="f2_t">Manifest UAC</h3>
+        <p data-t="f2_d">Zintegrowane wsparcie dla User Account Control. Twórz aplikacje, które automatycznie proszą o uprawnienia administratora.</p>
+      </div>
+      <div class="card">
+        <h3 data-t="f3_t">Własne Ikony</h3>
+        <p data-t="f3_d">Z łatwością osadzaj pliki .ico, aby Twoja aplikacja wyglądała profesjonalnie i była rozpoznawalna w systemie.</p>
+      </div>
+      <div class="card">
+        <h3 data-t="f4_t">Ochrona Hasłem</h3>
+        <p data-t="f4_d">Możliwość zabezpieczenia procesu kompilacji hasłem (SHA-256), zwiększając bezpieczeństwo Twojego rozwiązania.</p>
+      </div>
+      <div class="card">
+        <h3 data-t="f5_t">Wielowątkowość</h3>
+        <p data-t="f5_d">Interfejs GUI pozostaje responsywny podczas procesu budowania dzięki asynchronicznemu przetwarzaniu w tle.</p>
+      </div>
+      <div class="card">
+        <h3 data-t="f6_t">Brak Konsoli</h3>
+        <p data-t="f6_d">Opcja "Windowed" pozwala na ukrycie czarnego okna terminala dla aplikacji z graficznym interfejsem użytkownika.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p data-t="cta_sub">Python Builder v3.0 to aplikacja typu single-file. Nie wymaga instalacji.</p>
+    <p style="margin-top: 1rem;">2025© polsoft.ITS™ Group. <span data-t="footer_text">Wszelkie prawa zastrzeżone.</span></p>
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        hero_title: "Python Builder",
+        hero_sub: "Professional GUI tool to compile Python scripts (.py) into standalone Windows executables (.exe) with a single click.",
+        btn_github: "⚡ GitHub",
+        btn_learn: "Learn More",
+        preview_label: "Application Interface",
+        process_label: "Build Process",
+        stat_1: "Select Script",
+        stat_2: "Configure",
+        stat_3: "Build",
+        step1_d: "Point to your main .py file.",
+        step2_d: "Add icons, passwords or UAC manifests.",
+        step3_d: "Get your EXE in the output folder.",
+        feat_label: "Key Features",
+        feat_title: "Advanced Build Engine",
+        f1_t: "One-File EXE",
+        f1_d: "Bundle everything into a single .exe. No dependencies required on the target PC.",
+        f2_t: "UAC Manifest",
+        f2_d: "Automatically request administrator privileges for your applications.",
+        f3_t: "Custom Icons",
+        f3_d: "Easily embed .ico files to make your app look professional.",
+        f4_t: "Password Protection",
+        f4_d: "Secure your build process with SHA-256 hashed password verification.",
+        f5_t: "Multi-threading",
+        f5_d: "The GUI stays responsive while building in the background.",
+        f6_t: "No-Console Mode",
+        f6_d: "Hide the terminal window for pure GUI applications.",
+        cta_sub: "Python Builder v3.0 is a single-file portable app. No installation needed.",
+        footer_text: "All rights reserved."
+      },
+      pl: {
+        hero_title: "Python Builder",
+        hero_sub: "Profesjonalne narzędzie GUI do kompilacji skryptów Python (.py) w samodzielne pliki wykonywalne Windows (.exe) za pomocą jednego kliknięcia.",
+        btn_github: "⚡ GitHub",
+        btn_learn: "Dowiedz się więcej",
+        preview_label: "Interfejs Programu",
+        process_label: "Proces Kompilacji",
+        stat_1: "Wybierz skrypt",
+        stat_2: "Konfiguruj",
+        stat_3: "Kompiluj",
+        step1_d: "Wskaż swój główny plik .py do przetworzenia.",
+        step2_d: "Dodaj ikonę, hasło lub wymuś uprawnienia Admina.",
+        step3_d: "Odbierz gotowy plik EXE w folderze wyjściowym.",
+        feat_label: "Główne Funkcje",
+        feat_title: "Zaawansowany Silnik Kompilacji",
+        f1_t: "Pojedynczy plik EXE",
+        f1_d: "Pakuj wszystko w jeden plik .exe. Brak wymaganych zależności na komputerze docelowym.",
+        f2_t: "Manifest UAC",
+        f2_d: "Automatycznie żądaj uprawnień administratora dla swoich aplikacji.",
+        f3_t: "Własne Ikony",
+        f3_d: "Z łatwością osadzaj pliki .ico, aby Twoja aplikacja wyglądała profesjonalnie.",
+        f4_t: "Ochrona Hasłem",
+        f4_d: "Zabezpiecz proces kompilacji hasłem SHA-256 dla lepszej kontroli.",
+        f5_t: "Wielowątkowość",
+        f5_d: "Interfejs pozostaje płynny podczas kompilacji dzięki pracy w tle.",
+        f6_t: "Tryb Okienkowy",
+        f6_d: "Ukryj konsolę systemową dla aplikacji posiadających własne GUI.",
+        cta_sub: "Python Builder v3.0 to aplikacja typu single-file. Nie wymaga instalacji.",
+        footer_text: "Wszelkie prawa zastrzeżone."
+      }
+    };
+
+    let currentLang = 'pl';
+
+    function setLang(lang) {
+      currentLang = lang;
+      updateLanguage();
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.innerText.toLowerCase() === lang);
+      });
+    }
+
+    function updateLanguage() {
+      document.querySelectorAll('[data-t]').forEach(el => {
+        const key = el.getAttribute('data-t');
+        if (translations[currentLang][key]) {
+          el.innerHTML = translations[currentLang][key];
+        }
+      });
+    }
+
+    // Inicjalizacja
+    updateLanguage();
+  </script>
+</body>
+</html>
