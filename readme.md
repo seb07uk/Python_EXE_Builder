@@ -1,5 +1,6 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/seb07uk/python-builder/main/logo.png" width="96" alt="Python Builder Logo" />
+ <img width="962" height="772" alt="image" src="https://github.com/user-attachments/assets/6e0b7b00-c965-4ee7-b151-a1e4455bfc80" />
+
 </p>
 
 <h1 align="center">Python Builder v3.0</h1>
